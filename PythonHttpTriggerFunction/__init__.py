@@ -4,6 +4,7 @@ import azure.functions as func
 import numpy as np
 import pandas as pd
 import MySQLdb as sql
+import cv2 as cv
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -12,6 +13,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info(a)
 
     s = pd.Series([1, 3, 5, np.nan, 6, 8])
+
+    face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
     name = req.params.get('name')
     if not name:
